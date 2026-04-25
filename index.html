@@ -1,0 +1,34 @@
+<div id="lista-proyectos">Cargando proyectos...</div>
+
+<style>
+.proyecto-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+.proyecto-card h3 { margin: 0 0 8px 0; color: #1E3A8A; }
+.proyecto-card p  { margin: 0; color: #555; }
+</style>
+
+<script>
+fetch('/wordpress/wp-json/wp/v2/proyecto?_fields=id,title,descripcion_corta')
+  .then(res => res.json())
+  .then(proyectos => {
+    const contenedor = document.getElementById('lista-proyectos');
+    if (!proyectos.length) {
+      contenedor.innerHTML = '<p>No hay proyectos publicados.</p>';
+      return;
+    }
+    contenedor.innerHTML = proyectos.map(p => `
+      <div class="proyecto-card">
+        <h3>${p.title.rendered}</h3>
+        <p>${p.descripcion_corta || 'Sin descripción'}</p>
+      </div>
+    `).join('');
+  })
+  .catch(() => {
+    document.getElementById('lista-proyectos').innerHTML = '<p>Error al cargar proyectos.</p>';
+  });
+</script>
