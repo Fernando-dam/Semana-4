@@ -3,7 +3,7 @@
 Plugin Name: Mi Plugin Proyectos
 Description: Registra el CPT Proyecto con ACF y REST API
 Version: 1.0
-Author: Tu Nombre
+Author: Fernando 
 */
 
 // 1. REGISTRAR EL CUSTOM POST TYPE "proyecto"
